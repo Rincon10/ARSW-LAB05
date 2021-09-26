@@ -1,0 +1,14 @@
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+main section{
+    flex-grow: 1; 
+}
+
+canvas  {
+    border: 1px solid #000;
+}

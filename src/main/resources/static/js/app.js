@@ -6,6 +6,7 @@ var app = ( function(){
     var _buttonBlueprints = document.getElementById('buttonBlueprints');
     var _totalPointsLabel = $('#totalPoints');
     var _bluePrintsAuthor = $('#bluePrintsAuthor');
+    var _currentBlueprint= $('#currentBluePrint');
 
     loadEventListeners();
     function loadEventListeners(){
@@ -19,6 +20,7 @@ var app = ( function(){
     function  updateData( totalOfPoints ){
         _totalPointsLabel.text(`Total Points: ${totalOfPoints}`);
         _bluePrintsAuthor.text(`${_inputNombre} blueprint's`);
+        _currentBlueprint.text(`Current Blueprint:`);
     }
 
     function callB (error , mockDataAuthor) {
@@ -51,7 +53,28 @@ var app = ( function(){
     }
 
     function draw( bluePrintName){
-        console.log(`dibujando  ${bluePrintName}`);
+        //Actualizamos el blueprint seleccionado
+        _currentBlueprint.text(`Current Blueprint: ${bluePrintName}`);
+
+        apimock.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, (error , mockDataAuthor)=>{
+            if(error) return;
+            var _canvas = $('#canvas')[0];
+            const { points } = mockDataAuthor[0];
+            if( _canvas.getContext ){
+                const context = _canvas.getContext('2d');
+                //context.clearRect(0, 0, canvas.width, canvas.height);
+                //Limpiando canvas
+                canvas.width=canvas.width;
+                context.moveTo(points[0].x, points[0].y);
+                points.forEach( point=>{
+                    const {x,y} = point;
+                    context.lineTo(x,y);
+                });
+                context.stroke();
+            }
+        });
+
+        
     }
 
     function bluePrintsHTML(totalOfPoints){

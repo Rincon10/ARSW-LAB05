@@ -18,36 +18,37 @@
 </head>
 <body>
     <h1>Blueprints</h1>
-    <section id="authorInfo">
+    <main id="flex-container">
+        <section id="authorInfo">
         
-        <div>
-            <label id="author">Author</label>
-            <input id="inputNombre"  type="text">
-            <button id="buttonBlueprints"> Get Blueprints</button>
-        </div>
-    </section>
-
-    <section id="blueprintInfo">
-        <h2 id="bluePrintsAuthor"> blueprints:</h2>
-        <div id="blueprintsInfo">
-            <table id="blueprintsTable" border="1px;">
-                <thead>
-                    <tr>
-                        <th>Blueprint name</th>
-                        <th>Number points</th>
-                        <th>Open</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-            <label id="totalPoints">Total Points:</label>
-        </div>
-        <div>
-            <canvas id="canvas" width="700" height="700"></canvas>
-        </div>
-    </section>
+            <div>
+                <label id="author">Author</label>
+                <input id="inputNombre"  type="text">
+                <button id="buttonBlueprints"> Get Blueprints</button>
+            </div>
+            <h2 id="bluePrintsAuthor"> blueprints:</h2>
+            <div id="blueprintsInfo">
+                <table id="blueprintsTable" border="1px;">
+                    <thead>
+                        <tr>
+                            <th>Blueprint name</th>
+                            <th>Number points</th>
+                            <th>Open</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <label id="totalPoints">Total Points:</label>
+            </div>
+        </section>
+        <section id="blueprintInfo">
+            <div>
+                <h2 id="currentBluePrint">Current Blueprint:</h2>
+                <canvas id="canvas" width="700" height="700"></canvas>
+            </div>
+        </section>
+    </main>
     <!-- Scripts -->
     <script src="js/apimock.js"></script>
     <script src="js/app.js"></script>
