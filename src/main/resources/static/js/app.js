@@ -13,7 +13,7 @@ var app = ( function(){
             console.log('No lo encontre');
             return;
         }
-        _buttonBlueprints.addEventListener('click', readInputData);
+        _buttonBlueprints.addEventListener('click', getBlueprints);
     }
 
     function  updateData( totalOfPoints ){
@@ -21,23 +21,30 @@ var app = ( function(){
         _bluePrintsAuthor.text(`${_inputNombre} blueprint's`);
     }
 
-    function readInputData(event){
+    function callB (error , mockDataAuthor) {
+        _listOfBlueprints = mockDataAuthor.map( blueprint => {
+            if( error  ){ return;}
+            const data  = {
+                name:blueprint.name,
+                numberOfPoints: blueprint.points.length
+            };
+            //_totalOfPoints+=data.numberOfPoints;
+            return data;
+        });
+    }
+
+    function getBlueprints(event){
+        readInputData(null);
+    }
+
+
+    function readInputData(bluePrintName){
         //Limpiamos los datos existentes
         _listOfBlueprints=[];
         _inputNombre = $('#inputNombre').val();
         //Buscamos los blueprints segun el dato ingresado
-        apimock.getBlueprintsByAuthor( _inputNombre, (error , mockDataAuthor) =>{
-            _listOfBlueprints = mockDataAuthor.map( blueprint => {
-                if( error  ){ return;}
-                const data  = {
-                    name:blueprint.name,
-                    numberOfPoints: blueprint.points.length
-                };
-                //_totalOfPoints+=data.numberOfPoints;
-                return data;
-            });
-
-        } );
+        if (bluePrintName === null) apimock.getBlueprintsByAuthor( _inputNombre, callB);
+        else apimock.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, callB);
         _totalOfPoints = _listOfBlueprints.reduce( (total, {numberOfPoints}) => total + numberOfPoints, 0);
         //Lo pasamos a html
         bluePrintsHTML(_totalOfPoints);
@@ -63,21 +70,25 @@ var app = ( function(){
             //Agregando a la tabla
             _table.append(row);
         });
-        
-        
     }
 
- 
+    function updateName(newName) {
+        $('#inputNombre').val(newName);
+    }
 
     return {
             updateAuthorName : newName => {
-                $('#inputNombre').val(newName);
+                updateName(newName);
             },
-            updateListBlueprintsByAuthor : newName => {
-                $('#inputNombre').val(newName);
-                readInputData();
+            setListBlueprintsByAuthor : author => {
+                updateName(author);
+                readInputData(null);
             },
-            drawBlueprint : function(name){
+            setListBlueprintsByNameAndAuthor : (name,author) => {
+                updateName(author);
+                readInputData(name);
+            },
+            drawBlueprint : (name) =>{
                 draw(name);
             }
     }
