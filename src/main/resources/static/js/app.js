@@ -24,8 +24,8 @@ var app = ( function(){
     }
 
     function callB (error , mockDataAuthor) {
+        if( error  ){ return;}
         _listOfBlueprints = mockDataAuthor.map( blueprint => {
-            if( error  ){ return;}
             const data  = {
                 name:blueprint.name,
                 numberOfPoints: blueprint.points.length
