@@ -25,20 +25,20 @@ var app = ( function(){
         //Limpiamos los datos existentes
         _listOfBlueprints=[];
         _inputNombre = $('#inputNombre').val();
-        var _totalOfPoints = 0;
         //Buscamos los blueprints segun el dato ingresado
         apimock.getBlueprintsByAuthor( _inputNombre, (error , mockDataAuthor) =>{
-            mockDataAuthor.map( blueprint => {
+            _listOfBlueprints = mockDataAuthor.map( blueprint => {
                 if( error  ){ return;}
                 const data  = {
                     name:blueprint.name,
                     numberOfPoints: blueprint.points.length
                 };
-                _totalOfPoints+=data.numberOfPoints;
-                _listOfBlueprints.push(data);
+                //_totalOfPoints+=data.numberOfPoints;
+                return data;
             });
 
         } );
+        _totalOfPoints = _listOfBlueprints.reduce( (total, {numberOfPoints}) => total + numberOfPoints, 0);
         //Lo pasamos a html
         bluePrintsHTML(_totalOfPoints);
     }
@@ -52,7 +52,7 @@ var app = ( function(){
         // Limpiamos el contenido de la tabla HTML
         _table.empty();
 
-        _listOfBlueprints.forEach(bluePrint => {
+        _listOfBlueprints.map(bluePrint => {
             const {name, numberOfPoints } = bluePrint;
             const row = document.createElement('tr');
             const button = `<button onclick="app.drawBlueprint('${name}')"> Open </button>`;
@@ -71,7 +71,11 @@ var app = ( function(){
 
     return {
             updateAuthorName : newName => {
-                $('#author').val(newName);
+                $('#inputNombre').val(newName);
+            },
+            updateListBlueprintsByAuthor : newName => {
+                $('#inputNombre').val(newName);
+                readInputData();
             },
             drawBlueprint : function(name){
                 draw(name);
