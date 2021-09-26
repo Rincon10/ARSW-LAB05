@@ -14,42 +14,42 @@
     <link rel="stylesheet" href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
 
-    <!-- Scripts -->
-    <script src="js/apimock.js"></script>
-    <script src="js/app.js"></script>
 
 </head>
 <body>
-<section id="authorInfo">
     <h1>Blueprints</h1>
-    <div>
-        <label id="author">Author</label>
-        <input id="inputNombre"  type="text">
-        <button id="buttonBlueprints"> Get Blueprints</button>
-    </div>
-</section>
+    <section id="authorInfo">
+        
+        <div>
+            <label id="author">Author</label>
+            <input id="inputNombre"  type="text">
+            <button id="buttonBlueprints"> Get Blueprints</button>
+        </div>
+    </section>
 
-<section id="blueprintInfo">
-    <h1> blueprints:</h1>
-    <div id="blueprintsInfo">
-        <table id="blueprintsTable" border="1px;">
-            <thead>
-                <tr>
-                    <th>Blueprint name</th>
-                    <th>Number points</th>
-                    <th>Open</th>
-                </tr>
-            </thead>
-            <tbody>
+    <section id="blueprintInfo">
+        <h2 id="bluePrintsAuthor"> blueprints:</h2>
+        <div id="blueprintsInfo">
+            <table id="blueprintsTable" border="1px;">
+                <thead>
+                    <tr>
+                        <th>Blueprint name</th>
+                        <th>Number points</th>
+                        <th>Open</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-        <label id="totalPoints">Total Points:</label>
-    </div>
-    <div>
-        <canvas id="canvas" width="700" height="700"></canvas>
-    </div>
-</section>
-
+                </tbody>
+            </table>
+            <label id="totalPoints">Total Points:</label>
+        </div>
+        <div>
+            <canvas id="canvas" width="700" height="700"></canvas>
+        </div>
+    </section>
+    <!-- Scripts -->
+    <script src="js/apimock.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
