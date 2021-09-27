@@ -7,7 +7,7 @@ var apiclient = (function () {
                 $.get(url+name,(data)=>{
                     temp=data;
                 });
-                return callback(null,f)
+                return callback(null,temp);
         },
         getBlueprintsByNameAndAuthor: (name, author, callback)=> {
             jQuery.ajax({
