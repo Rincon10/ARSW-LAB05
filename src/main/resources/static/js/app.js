@@ -1,5 +1,6 @@
 var app = ( function(){
 
+    var _module = apimock;
     var _listOfBlueprints;
     var _inputNombre;
     var _table = $('#blueprintsTable tbody');
@@ -24,7 +25,7 @@ var app = ( function(){
     }
 
     function callB (error , mockDataAuthor) {
-        if( error  ){ return;}
+        if( error !== null  ){ return;}
         _listOfBlueprints = mockDataAuthor.map( blueprint => {
             const data  = {
                 name:blueprint.name,
@@ -33,6 +34,7 @@ var app = ( function(){
             //_totalOfPoints+=data.numberOfPoints;
             return data;
         });
+        console.log(_listOfBlueprints,'1');
     }
 
     function getBlueprints(event){
@@ -45,9 +47,10 @@ var app = ( function(){
         _listOfBlueprints=[];
         _inputNombre = $('#inputNombre').val();
         //Buscamos los blueprints segun el dato ingresado
-        if (bluePrintName === null) apimock.getBlueprintsByAuthor( _inputNombre, callB);
-        else apimock.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, callB);
+        if (bluePrintName === null) _module.getBlueprintsByAuthor( _inputNombre, callB);
+        else _module.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, callB);
         _totalOfPoints = _listOfBlueprints.reduce( (total, {numberOfPoints}) => total + numberOfPoints, 0);
+        console.log(_listOfBlueprints,'3');
         //Lo pasamos a html
         bluePrintsHTML(_totalOfPoints);
     }
@@ -56,7 +59,7 @@ var app = ( function(){
         //Actualizamos el blueprint seleccionado
         _currentBlueprint.text(`Current Blueprint: ${bluePrintName}`);
 
-        apimock.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, (error , mockDataAuthor)=>{
+        _module.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, (error , mockDataAuthor)=>{
             if(error) return;
             var _canvas = $('#canvas')[0];
             const { points } = mockDataAuthor[0];
@@ -81,7 +84,7 @@ var app = ( function(){
         updateData(totalOfPoints);
         // Limpiamos el contenido de la tabla HTML
         _table.empty();
-
+        console.log(_listOfBlueprints,'2');
         _listOfBlueprints.map(bluePrint => {
             const {name, numberOfPoints } = bluePrint;
             const row = document.createElement('tr');
@@ -113,6 +116,9 @@ var app = ( function(){
             },
             drawBlueprint : (name) =>{
                 draw(name);
+            },
+            setModule : (module = apimock)=>{
+                _module = module;
             }
     }
 })();
