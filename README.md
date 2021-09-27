@@ -1,7 +1,12 @@
 
 ### Escuela Colombiana de Ingeniería
 ### Arquiecturas de Software
+### Integrantes:
 
+|     Nombre    |     Git         |
+|--------------|------------- | 
+|Camilo Rincón|[Rincon10](https://github.com/Rincon10 )  |
+|Leonardo Garzón |[Ersocaut](https://github.com/Ersocaut)   |
 ## Construción de un cliente 'grueso' con un API REST, HTML5, Javascript y CSS3. Parte I.
 
 ### Trabajo individual o en parejas. A quienes tuvieron malos resultados en el parcial anterior se les recomienda hacerlo individualmente.
