@@ -34,7 +34,6 @@ var app = ( function(){
             //_totalOfPoints+=data.numberOfPoints;
             return data;
         });
-        console.log(_listOfBlueprints,'1');
     }
 
     function getBlueprints(event){
@@ -50,7 +49,6 @@ var app = ( function(){
         if (bluePrintName === null) _module.getBlueprintsByAuthor( _inputNombre, callB);
         else _module.getBlueprintsByNameAndAuthor(bluePrintName, _inputNombre, callB);
         _totalOfPoints = _listOfBlueprints.reduce( (total, {numberOfPoints}) => total + numberOfPoints, 0);
-        console.log(_listOfBlueprints,'3');
         //Lo pasamos a html
         bluePrintsHTML(_totalOfPoints);
     }
@@ -84,7 +82,6 @@ var app = ( function(){
         updateData(totalOfPoints);
         // Limpiamos el contenido de la tabla HTML
         _table.empty();
-        console.log(_listOfBlueprints,'2');
         _listOfBlueprints.map(bluePrint => {
             const {name, numberOfPoints } = bluePrint;
             const row = document.createElement('tr');
